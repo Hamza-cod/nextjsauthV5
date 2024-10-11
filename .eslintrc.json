@@ -1,3 +1,7 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript"]
+  "extends": ["next/core-web-vitals"],
+  "rules": {
+    "no-var": "warn",                // Warn when using `var` instead of `let` or `const`
+    "no-unused-vars": "warn"        // Warn on unused variables
+  }
 }
