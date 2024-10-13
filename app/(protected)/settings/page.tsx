@@ -1,6 +1,5 @@
 import { auth, signOut } from "@/auth"
 import { Button } from "@/components/ui/button";
-
 export default  async  function SttingsPage() {
  const session = await auth();
   return (
@@ -10,12 +9,12 @@ export default  async  function SttingsPage() {
      <form action={
        async ()=>{
         "use server";
-          await signOut()
+        await signOut()
       }
      }>
-     <Button type="submit">
+     <button type="submit">
       logout
-     </Button>
+     </button>
      </form>
      page</div>
   )

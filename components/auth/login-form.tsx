@@ -19,10 +19,14 @@ import FormSuccess from "../form-success";
 import { login } from "@/actions/login";
 import { useState, useTransition } from "react";
 import ShowHide from "./show-hide-passowrd";
+import { useSearchParams } from "next/navigation";
 
 
 
 const LoginForm = () => {
+  const searchPrams = useSearchParams()
+  const urlEroor = searchPrams.get("error") == "OAuthAccountNotLinked"?
+                  "Email already in use with diffrent provider!" : ""
  const [error,setError] = useState<string|undefined>("");
  const [success,setSuccess] = useState<string|undefined>("");
  const [show,setShow] = useState(false)
@@ -39,9 +43,8 @@ const onSubmit = (values : z.infer<typeof LoginSchem>)=>{
   setError("")
   setSuccess("")
    login(values).then((data) => {
-    console.log(data)
-    setError(data.error)
-    setSuccess(data.success)
+    setError(data?.error)
+    setSuccess(data?.success)
    })
  })
 }
@@ -49,7 +52,7 @@ const onSubmit = (values : z.infer<typeof LoginSchem>)=>{
  return ( 
   <CardWrapper
   backbButtonLabel="Don't have an account?"
-  headerLabael="Welcome back"
+  headerLabel="Welcome back"
   backButtonHref="/auth/register"
   showSocial
   >
@@ -93,7 +96,7 @@ const onSubmit = (values : z.infer<typeof LoginSchem>)=>{
           )}
           />
       </div>
-      <FormError message={error}/>
+      <FormError message={error || urlEroor}/>
       <FormSuccess message={success}/>
       <Button className="w-full"  disabled={isPending}>
        Login

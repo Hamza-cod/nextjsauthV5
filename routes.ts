@@ -14,6 +14,7 @@ export  const  publicRoutes : string[] = [
  export const authRoures :string[]=[
   "/auth/login",
   "/auth/register",
+  "/auth/error"
  ]
 
 /**
@@ -28,3 +29,14 @@ export  const  publicRoutes : string[] = [
   */
 
  export const DEFAULT_LOGIN_REDIRECT : string = "/settings"
+ /**
+  * this route is for login page 
+  * @type {string}
+  */
+ export const LOGIN_URI : string = "/auth/login"
+
+ /**
+  * this route is for error page 
+  * @type {string}
+  */
+ export const ERROR_URI : string = "/auth/error"
