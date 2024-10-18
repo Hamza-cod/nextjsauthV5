@@ -1,5 +1,8 @@
-import LoginForm from "@/components/auth/login-form";
-const LoginPage = async () => {
+import dynamic from 'next/dynamic';
+
+const LoginForm = dynamic(() => import('@/components/auth/login-form'), { ssr: false });
+
+const LoginPage =  () => {
  return ( 
   <LoginForm/>
   );

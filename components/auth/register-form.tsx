@@ -49,7 +49,7 @@ const onSubmit = (values : z.infer<typeof RegisterSchema>)=>{
  return ( 
   <CardWrapper
   backbButtonLabel="you have an account?"
-  headerLabael="Create your account NOW!"
+  headerLabel="Create your account NOW!"
   backButtonHref="/auth/login"
   showSocial
   >

@@ -2,8 +2,8 @@ import NextAuth, { type DefaultSession } from "next-auth"
 import authConfig from "@/auth.config"
 import { PrismaAdapter } from "@auth/prisma-adapter"
 import { db } from "./lib/db";
-import { UserRole } from "@prisma/client";
 import { LOGIN_URI ,ERROR_URI} from "./routes";
+import { getUserById } from "./data/user";
 // import { getUserById } from "./data/user";
 
 
@@ -14,7 +14,7 @@ declare module "next-auth" {
   interface Session {
     user: {
       /** The user's postal address. */
-      role: UserRole
+      // role: Role
       /**
        * By default, TypeScript merges new interface properties and overwrites existing ones.
        * In this case, the default session user properties will be overwritten,
@@ -45,20 +45,24 @@ export const { handlers,
       }
     },
     callbacks: {
-      // async signIn({user}){
-      //       const existingUser = await getUserById(user?.id as string)
-      //       if(!existingUser || !existingUser?.emailVerified ){
-      //           return false;
-      //       }
-      //       return true;
-      // },
+      async signIn({user,account}){
+            const existingUser = await getUserById(user?.id as string)
+            // allow OAuth pass with out email verification
+            if(account?.provider !=="credentials") return true;
+
+            if( !existingUser?.emailVerified ){
+                return false;
+            }
+            // add to 2FA validation
+            return true;
+      },
       async session({ session, token }) {
 
         if (token.sub && session.user) {
           session.user.id = token.sub;
         }
         if (token.role && session.user) {
-          session.user.role = token.role as UserRole;
+          session.user.role = token.role ;
         }
         return session;
       },

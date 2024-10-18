@@ -3,7 +3,6 @@ import { LoginSchem } from "./schemas"
 import  Credential from "next-auth/providers/credentials"
 import { getUserByEmail } from "./data/user"
 import  bcrypt  from 'bcryptjs';
-import { User } from "@prisma/client";
 import Github from "next-auth/providers/github"
 import Google from "next-auth/providers/google"
 // Notice this is only an object, not a full Auth.js instance

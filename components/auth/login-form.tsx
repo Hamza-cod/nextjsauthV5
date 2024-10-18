@@ -23,7 +23,7 @@ import { useSearchParams } from "next/navigation";
 
 
 
-const LoginForm = () => {
+export default function LoginForm (){
   const searchPrams = useSearchParams()
   const urlEroor = searchPrams.get("error") == "OAuthAccountNotLinked"?
                   "Email already in use with diffrent provider!" : ""
@@ -107,4 +107,3 @@ const onSubmit = (values : z.infer<typeof LoginSchem>)=>{
   );
 }
  
-export default LoginForm;

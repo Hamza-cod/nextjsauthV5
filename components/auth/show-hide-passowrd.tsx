@@ -3,7 +3,7 @@
 import { Checkbox } from "@/components/ui/checkbox"
 interface ShowHideProps {
  show : boolean;
- setShow : (notShow :boolean) => void
+ setShow : (notShow : boolean) => void
 }
 const ShowHide = ({setShow,show} : ShowHideProps) => {
  return ( 

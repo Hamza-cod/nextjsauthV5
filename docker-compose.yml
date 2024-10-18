@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  nextaut:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        GITHUB_CLIENT_ID: ${GITHUB_CLIENT_ID}
+        GITHUB_CLIENT_SECRET: ${GITHUB_CLIENT_SECRET}
+        GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+        GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
+        DATABASE_URL: ${DATABASE_URL}
+        DATABASE_URL_UNPOOLED: ${DATABASE_URL_UNPOOLED}
+        RESEND_API_KEY: ${RESEND_API_KEY}
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./src:/app/src
+      - /app/node_modules
+
+
